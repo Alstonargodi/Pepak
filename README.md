@@ -1,4 +1,4 @@
-#  Pepakku
+#  pepak
 
 Classification of Javanese characters in mobile devices. In this project, it is a continuation of the learning project [cnn digit](https://github.com/Alstonargodi/CNN-digit-tkinter) before,but in this project the introduction of Javanese characters in handwritten form is entered by drawing on the canvas that has been provided, I also use this project as the final project for the pattern recognition course.
 
