@@ -4,7 +4,15 @@
 Classification of Javanese characters in mobile devices. In this project, it is a continuation of the learning project [cnn digit](https://github.com/Alstonargodi/CNN-digit-tkinter) before,but in this project the introduction of Javanese characters in handwritten form is entered by drawing on the canvas that has been provided, I also use this project as the final project for the pattern recognition course.
 
 ### 🎯Point
-In this project, I perform how to use Convolutional Neural networks for pattern recognition and using TensorFlow lite. Starting from Preprocessing the dataset, making the TensorFlow lite model and building the android apps
+In this project, I perform how to use Convolutional Neural networks for pattern recognition and using TensorFlow lite. Starting from Preprocessing the dataset, making the TensorFlow lite model and building the android apps.
+ - [x] pre-process dataset
+ - [x] making cnn model
+ - [x] traning the model
+ - [x] test the model
+ - [x] export to tflite
+ - [x] build first layout
+ - [x] pre-process from canvas
+ - [x] test the apps
 
 ### 📦 Others 
 - Aksara jawa  dataset
