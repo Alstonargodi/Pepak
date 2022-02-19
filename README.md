@@ -4,19 +4,20 @@ Classification of Javanese characters in mobile devices. In this project, it is 
 
 ### 🎯Point
 In this project, I perform how to use Convolutional Neural Network for recognition pattern and using tensorflow lite. Starting from 
-Making a model
- 1. Retrieving the dataset I got from kaggle [Javanese letter](https://www.kaggle.com/phiard/aksara-jawa)
- 2. Preprocessing dataset
- 3. Showing the dataset for preview
- 4. Making model and cnn architecture
- 5. Training and validating
- 6. Import a model as tensorflow lite
+Preprocessing the dataset , making tensorflowlite model and build the android apps
 
 ### 📦 Others 
+- Aksara jawa  dataset
+Before making a model we need a dataset first and I use that from Kaggle  [Aksara jawa dataset](https://www.kaggle.com/phiard/aksara-jawa)(https://www.kaggle.com/phiard/aksara-jawa)
 
- - [tensorflowlite](https://github.com/Discord4J/Discord4J)
-A fast, powerful, unopinionated, reactive library to enable quick and easy development of Discord bots for Java, Kotlin, and other JVM languages
+ - [Tensorflow lite](https://www.tensorflow.org/lite)
+An open source deep learning framework for on-device inference
 
+ - [Glide](https://bumptech.github.io/glide/)
+Glide is a fast and efficient image loading library for Android focused on smooth scrolling. Glide offers an easy to use API, a performant and extensible resource decoding pipeline and automatic resource pooling.
+
+- [Realtime Database](https://firebase.google.com/docs/database)
+a cloud-hosted database provide by google for saving  dataset of Javanese script words and reduce the size of the application itself
 
 ### 🤖 Screenshot
 
