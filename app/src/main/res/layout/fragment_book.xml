@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".View.Book">
+    tools:context=".presentasion.fragment.book.BookFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="389dp"
-        android:layout_height="805dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,25 +18,29 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recview_book"
-            android:layout_width="392dp"
-            android:layout_height="608dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.231" />
+            app:layout_constraintVertical_bias="0.231"
+            tools:listitem="@layout/itemcard_bookhome" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="393dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="48dp"
-            android:text="Pepakku"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Word List"
             android:textColor="#1A1919"
             android:textSize="27sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

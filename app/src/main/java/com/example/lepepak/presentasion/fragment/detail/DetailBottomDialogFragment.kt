@@ -1,4 +1,4 @@
-package com.example.lepepak
+package com.example.lepepak.presentasion.fragment.detail
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -6,44 +6,39 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.example.lepepak.Util.Classakurasi
-import com.example.lepepak.Util.Classficer
+import com.example.lepepak.helpers.MainPrediction
 import com.example.lepepak.databinding.FragmentBottomDetailListDialogBinding
-import com.example.lepepak.databinding.FragmentDetailBottomListDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
-class Detail_bottom : BottomSheetDialogFragment() {
+class DetailBottomDialogFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentBottomDetailListDialogBinding? = null
     private val binding get() = _binding!!
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentBottomDetailListDialogBinding.inflate(inflater, container, false)
 
-        var digitclasficer = Classakurasi(requireContext())
+        val letterClassification = MainPrediction(requireContext())
 
-        val nama = arguments?.getString("nama")
-        val desc = arguments?.getString("desc")
-        val link = arguments?.getString("link")
+        val name = arguments?.getString("nama")
+        val description = arguments?.getString("desc")
+        val imageUrl = arguments?.getString("link")
 
         //detail
-        binding.tvdetailNama.setText(nama)
-        binding.tvdetailDesc.setText(desc)
+        binding.tvdetailNama.text = name
+        binding.tvdetailDesc.text = description
 
         Glide.with(requireContext())
             .asBitmap()
-            .load(link)
+            .load(imageUrl)
             .into(binding.imgDetail)
 
         //draw area
@@ -54,28 +49,23 @@ class Detail_bottom : BottomSheetDialogFragment() {
             binding.laydetailDraw.clearCanvas()
         }
 
-        binding.laydetailDraw.setOnTouchListener { view, motionEvent ->
+        binding.laydetailDraw.setOnTouchListener { _, motionEvent ->
             binding.laydetailDraw.onTouchEvent(motionEvent)
-
-
             binding.btnPredict.setOnClickListener {
-                var bit = binding.laydetailDraw.getBitmap()
-                if ((bit != null) && (digitclasficer.isinitialize)){
-                    digitclasficer
-                        .classifyAsync(bit)
+                val bitmapImage = binding.laydetailDraw.getBitmap()
+                if (letterClassification.isInitialize){
+                    letterClassification
+                        .classifyAsync(bitmapImage)
                         .addOnSuccessListener {
-                            Log.d("hasil",it)
-                            binding.tvbottomResult.setText(it)
+                            binding.tvbottomResult.text = it
                         }
                 }
-                digitclasficer
+                letterClassification
                     .init()
                     .addOnFailureListener { Log.d("failed to classicfy",it.toString()) }
             }
             true
         }
-
-
         return binding.root
     }
 
@@ -87,9 +77,9 @@ class Detail_bottom : BottomSheetDialogFragment() {
             val bottomSheetDialog = it as BottomSheetDialog
             val parentLayout =
                 bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            parentLayout?.let { it ->
-                val behaviour = BottomSheetBehavior.from(it)
-                setupFullHeight(it)
+            parentLayout?.let { height ->
+                val behaviour = BottomSheetBehavior.from(height)
+                setupFullHeight(height)
                 behaviour.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }

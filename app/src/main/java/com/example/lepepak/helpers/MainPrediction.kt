@@ -1,9 +1,9 @@
-package com.example.lepepak.Util
+package com.example.lepepak.helpers
 
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Bitmap
-import com.example.lepepak.Model.Datalatin
+import com.example.lepepak.model.LatinWord
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import org.tensorflow.lite.Interpreter
@@ -16,27 +16,24 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import kotlin.jvm.Throws
 
-class Classakurasi(val context: Context) {
+class MainPrediction(val context: Context) {
 
     //tflite interpreter
     private var interpreter : Interpreter? = null
-    var isinitialize = false
-        private set
-
+    var isInitialize = false
 
     //executor pada background
-    private val executorservice : ExecutorService = Executors.newCachedThreadPool()
-    private var inputimgwidth : Int = 0
-    private var inputimgheight : Int = 0
-    private var modelinputsize : Int = 0
+    private val executorService : ExecutorService = Executors.newCachedThreadPool()
+    private var inputImgWidth : Int = 0
+    private var inputImgHeight : Int = 0
+    private var modelInputSize : Int = 0
     private var final : String = ""
-
 
     fun init(): Task<Void> {
         val task = TaskCompletionSource<Void>()
-        executorservice.execute {
+        executorService.execute {
             try{
-                initinterpreter()
+                initInterpreter()
                 task.setResult(null)
             }catch (e : IOException){
                 task.setException(e)
@@ -46,47 +43,48 @@ class Classakurasi(val context: Context) {
     }
 
     @Throws(IOException::class)
-    private fun initinterpreter(){
+    private fun initInterpreter(){
         //mengambil asset tf lite
-        val assetm = context.assets
-        val model = loadmodel(assetm,"aksaramodel28150.tflite")
+        val mAssets = context.assets
+        val mlModel = loadModel(mAssets,"aksaramodel28150.tflite")
 
-        val interprete = Interpreter(model) //
+        val interpreter = Interpreter(mlModel) //
 
-        //membaca bentuk gambar
-        val inputshape = interprete.getInputTensor(0).shape()
-        inputimgwidth = inputshape[1]
-        inputimgheight = inputshape[2]
-        modelinputsize = FLOAT_TYPE_SIZE * inputimgwidth * inputimgheight * PIXEL_SIZE
+        //membaca bentuk tensor
+        val inputShape = interpreter.getInputTensor(0).shape()
+        inputImgWidth = inputShape[1]
+        inputImgHeight = inputShape[2]
+        modelInputSize = FLOAT_TYPE_SIZE * inputImgWidth * inputImgHeight * PIXEL_SIZE
         //4 * inputwidthtensor * inputsizetensor * 1
 
-        this.interpreter = interprete
-        isinitialize = true
+        this.interpreter = interpreter
+        isInitialize = true
     }
 
     @Throws(IOException::class)
-    private fun loadmodel(assetManager: AssetManager, filename: String): ByteBuffer {
-        val filedescriptor = assetManager.openFd(filename) //membuka file
-        val inputstream = FileInputStream(filedescriptor.fileDescriptor)
-        val filechannel = inputstream.channel
-        val startOffset = filedescriptor.startOffset
-        val declaredLength = filedescriptor.declaredLength
-        return filechannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
+    private fun loadModel(assetManager: AssetManager, filename: String): ByteBuffer {
+        val fileDescriptor = assetManager.openFd(filename) //membuka file
+        val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
+
+        val fileChannel = inputStream.channel
+        val startOffset = fileDescriptor.startOffset
+        val declaredLength = fileDescriptor.declaredLength
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
 
 
-    private fun clasifikasi(bitmap: Bitmap): String{
+    private fun classification(bitmap: Bitmap): String{
 
         //preprocessing
-        val resizedimg = Bitmap.createScaledBitmap(
+        val resizeImage = Bitmap.createScaledBitmap(
             bitmap,
-            inputimgwidth,
-            inputimgheight,
+            inputImgWidth,
+            inputImgHeight,
             true
         )
 
-        val byteBuffer = konversibitmaptobytebuffer(resizedimg)
+        val byteBuffer = conversitionBitmapToByteBuffer(resizeImage)
 
         val output = Array(1){
             FloatArray(OUTPUT_CLASSES_COUNT)
@@ -97,20 +95,21 @@ class Classakurasi(val context: Context) {
 
         val result = output[0]
 
+
+        //get result
         val maxIndex = result.indices.maxByOrNull { result[it] } ?: -1
         val resultString = "result: %.2f".format(result[maxIndex])
 
-        val prediksi = maxIndex
-        val aksara = Datalatin.aksara
+        val resultDetect = LatinWord.aksara
 
-        for (i in aksara.indices) {
+        for (i in resultDetect.indices) {
 
-            if (prediksi < aksara.size) {
-                val hasil = aksara[prediksi]
+            if (maxIndex < resultDetect.size) {
+                val hasil = resultDetect[maxIndex]
 
-                final = "$resultString"
+                final = resultString
             } else {
-                final = "cannot find index = " + prediksi
+                final = "cannot find index = $maxIndex"
             }
 
         }
@@ -122,8 +121,8 @@ class Classakurasi(val context: Context) {
 
     fun classifyAsync(bitmap: Bitmap): Task<String> {
         val task = TaskCompletionSource<String>()
-        executorservice.execute {
-            val result = clasifikasi(bitmap)
+        executorService.execute {
+            val result = classification(bitmap)
 
             task.setResult(result)
 
@@ -133,13 +132,13 @@ class Classakurasi(val context: Context) {
 
 
 
-    private fun konversibitmaptobytebuffer(bitmap: Bitmap): ByteBuffer {
-        val byteBuffer = ByteBuffer.allocateDirect(modelinputsize)
+    private fun conversitionBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
+        val byteBuffer = ByteBuffer.allocateDirect(modelInputSize)
         byteBuffer.order(ByteOrder.nativeOrder())
 
 
 
-        val pixels = IntArray(inputimgwidth * inputimgheight)
+        val pixels = IntArray(inputImgWidth * inputImgHeight)
         bitmap.getPixels(pixels, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
 
         for (pixelValue in pixels) {
@@ -158,6 +157,6 @@ class Classakurasi(val context: Context) {
     companion object{
         private const val FLOAT_TYPE_SIZE = 4
         private const val PIXEL_SIZE = 1
-        private const val OUTPUT_CLASSES_COUNT = 20
+        private const val OUTPUT_CLASSES_COUNT = 20 //jumlah class
     }
 }

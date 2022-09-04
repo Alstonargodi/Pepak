@@ -7,7 +7,7 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.lepepak.MainActivity"
+        android:name="com.example.lepepak.presentasion.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <fragment
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/book"
-        android:name="com.example.lepepak.View.Book"
+        android:name="com.example.lepepak.presentasion.fragment.book.BookFragment"
         android:label="fragment_book"
         tools:layout="@layout/fragment_book" >
         <action
@@ -35,12 +35,12 @@
     </fragment>
     <fragment
         android:id="@+id/draw2"
-        android:name="com.example.lepepak.View.Draw"
+        android:name="com.example.lepepak.presentasion.fragment.draw.DrawFragment"
         android:label="fragment_draw"
         tools:layout="@layout/fragment_draw" />
     <fragment
         android:id="@+id/about2"
-        android:name="com.example.lepepak.About"
+        android:name="com.example.lepepak.presentasion.fragment.about.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
 </navigation>

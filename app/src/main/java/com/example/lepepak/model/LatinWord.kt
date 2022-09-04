@@ -1,6 +1,6 @@
-package com.example.lepepak.Model
+package com.example.lepepak.model
 
-object Datalatin {
+object LatinWord {
     val aksara = arrayOf(
         "ba",//0
         "ca",
