@@ -16,28 +16,24 @@ import com.google.firebase.database.*
 
 
 class DrawFragment : Fragment() {
-
     private var _binding: FragmentDrawBinding? = null
     private val binding get() = _binding!!
+    private lateinit var firebaseReference : DatabaseReference
 
-    lateinit var dbrefrence : DatabaseReference
     private lateinit var latinWord : ArrayList<JavaneseDBResponse>
-
     private var wordBuilder = StringBuilder()
     private var word : String = ""
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         _binding = FragmentDrawBinding.inflate(
             inflater,container,false
         )
-
         val classsification = SecondPrediction(requireContext())
-
         latinWord = arrayListOf()
 
         binding.drawLay.apply {
-            setStrokeWidth(20.0f)
+            setStrokeWidth(10.0f)
             setColor(Color.BLACK)
         }
 
@@ -45,8 +41,12 @@ class DrawFragment : Fragment() {
             binding.drawLay.clearCanvas()
         }
 
-        binding.drawLay.setOnTouchListener { view, motionEvent ->
+        binding.drawLay.setOnTouchListener { _, motionEvent ->
             binding.drawLay.onTouchEvent(motionEvent)
+
+            motionEvent.apply {
+                binding.btndrawReset.visibility = View.VISIBLE
+            }
 
             binding.btndrawPred.setOnClickListener {
                 val bitmapDraw = binding.drawLay.getBitmap()
@@ -61,7 +61,6 @@ class DrawFragment : Fragment() {
                         binding.tvResultdraw.text = it.message.toString()
                     }
             }
-
             true
         }
         binding.btndrawAdd.setOnClickListener {
@@ -72,8 +71,8 @@ class DrawFragment : Fragment() {
     }
 
     private fun showCharacterDescription(character : String){
-        dbrefrence = FirebaseDatabase.getInstance().getReference("data")
-        dbrefrence.child(character).addValueEventListener(object : ValueEventListener {
+        firebaseReference = FirebaseDatabase.getInstance().getReference("data")
+        firebaseReference.child(character).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     for(i in snapshot.children){
@@ -87,7 +86,6 @@ class DrawFragment : Fragment() {
                                 .into(binding.imgIcon)
                         }
                     }
-
                 }
             }
             override fun onCancelled(error: DatabaseError) {
