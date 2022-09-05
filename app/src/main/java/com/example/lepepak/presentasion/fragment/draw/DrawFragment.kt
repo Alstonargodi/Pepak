@@ -14,7 +14,6 @@ import com.example.lepepak.databinding.FragmentDrawBinding
 import com.example.lepepak.helpers.SecondPrediction
 import com.google.firebase.database.*
 
-
 class DrawFragment : Fragment() {
     private var _binding: FragmentDrawBinding? = null
     private val binding get() = _binding!!

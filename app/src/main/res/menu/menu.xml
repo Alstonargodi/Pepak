@@ -17,6 +17,12 @@
         />
 
     <item
+        android:title="Live"
+        android:id="@+id/cameraFragment"
+        android:icon="@drawable/ic_baseline_camera_alt_24"
+        />
+
+    <item
         android:title="About"
         android:id="@+id/about2"
         android:icon="@drawable/user"
