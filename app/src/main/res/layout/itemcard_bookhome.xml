@@ -2,23 +2,22 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="150dp"
     android:layout_height="100dp"
     android:layout_margin="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:cardBackgroundColor="#E35C5A5A">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/img_book"
-            android:layout_width="105dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
@@ -26,16 +25,16 @@
 
         <TextView
             android:id="@+id/tvbook_name"
-            android:layout_width="237dp"
-            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:gravity="center"
             android:text="Word"
-            android:textColor="#181717"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_book"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_book"
-            app:layout_constraintTop_toTopOf="@+id/img_book" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_book" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
