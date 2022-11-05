@@ -10,27 +10,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.lepepak.helpers.MainPrediction
 import com.example.lepepak.databinding.FragmentBottomDetailListDialogBinding
+import com.example.lepepak.databinding.FragmentDetailBottomListDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
-class DetailBottomDialogFragment : BottomSheetDialogFragment() {
+class DetailBottomDialogFragment : Fragment() {
 
     private var _binding: FragmentBottomDetailListDialogBinding? = null
     private val binding get() = _binding!!
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentBottomDetailListDialogBinding.inflate(inflater, container, false)
 
         val letterClassification = MainPrediction(requireContext())
 
-        val name = arguments?.getString("nama")
-        val description = arguments?.getString("desc")
-        val imageUrl = arguments?.getString("link")
+        val name = DetailBottomDialogFragmentArgs.fromBundle(requireArguments()).nama
+        val description = DetailBottomDialogFragmentArgs.fromBundle(requireArguments()).desc
+        val imageUrl = DetailBottomDialogFragmentArgs.fromBundle(requireArguments()).link
 
         //detail
         binding.tvdetailNama.text = name
@@ -67,28 +69,6 @@ class DetailBottomDialogFragment : BottomSheetDialogFragment() {
             true
         }
         return binding.root
-    }
-
-    //full dialog config
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = BottomSheetDialog(requireContext(), theme)
-        dialog.setOnShowListener {
-
-            val bottomSheetDialog = it as BottomSheetDialog
-            val parentLayout =
-                bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-            parentLayout?.let { height ->
-                val behaviour = BottomSheetBehavior.from(height)
-                setupFullHeight(height)
-                behaviour.state = BottomSheetBehavior.STATE_EXPANDED
-            }
-        }
-        return dialog
-    }
-    private fun setupFullHeight(bottomSheet: View) {
-        val layoutParams = bottomSheet.layoutParams
-        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
-        bottomSheet.layoutParams = layoutParams
     }
 
 }

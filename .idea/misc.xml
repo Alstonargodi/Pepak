@@ -6,16 +6,21 @@
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/drawable/corner_bg.xml" value="0.35625" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/drawable/corner_bg_dua.xml" value="0.35625" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/drawable/cv_bookhome.xml" value="0.35625" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/drawable/ic_lepepak_logo.xml" value="0.207" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/activity_detail_pepak.xml" value="0.25" />
-        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/cv_bookhome.xml" value="0.5" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/fragment_about.xml" value="0.18695175438596492" />
-        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/fragment_book.xml" value="0.5" />
-        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/fragment_bottom_detail_list_dialog.xml" value="0.33" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/fragment_book.xml" value="0.33" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/fragment_bottom_detail_list_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/fragment_camera.xml" value="0.1962719298245614" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/fragment_detail_aksara.xml" value="0.1367872807017544" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/fragment_detail_bottom_list_dialog.xml" value="0.3359375" />
-        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/fragment_draw.xml" value="0.1" />
-        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/itemcard_bookhome.xml" value="0.5" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/fragment_draw.xml" value="0.33" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/layout/itemcard_bookhome.xml" value="0.67" />
         <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/menu/menu.xml" value="0.33" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3195" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/Lepepak/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.207" />
       </map>
     </option>
   </component>

@@ -5,19 +5,21 @@
     tools:showIn="navigation_view"
     >
     <item
-        android:title="Book"
         android:id="@+id/book"
         android:icon="@drawable/book"
         />
 
     <item
-        android:title="Try"
         android:id="@+id/draw2"
         android:icon="@drawable/tulis"
         />
 
     <item
-        android:title="About"
+        android:id="@+id/cameraFragment"
+        android:icon="@drawable/ic_baseline_camera_alt_24"
+        />
+
+    <item
         android:id="@+id/about2"
         android:icon="@drawable/user"
         />

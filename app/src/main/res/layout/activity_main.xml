@@ -33,8 +33,8 @@
             android:id="@+id/bmenu"
             android:layout_width="0dp"
             android:layout_height="55dp"
-
-            android:background="#472D2D"
+            android:background="#E32B2B2B"
+            app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

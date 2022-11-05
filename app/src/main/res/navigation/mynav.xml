@@ -32,6 +32,18 @@
         <action
             android:id="@+id/action_book_to_mainActivity2"
             app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_book_to_detailBottomDialogFragment"
+            app:destination="@id/detailBottomDialogFragment" />
+        <action
+            android:id="@+id/action_book_to_detailBottomDialogFragment2"
+            app:destination="@id/detailBottomDialogFragment" />
+        <action
+            android:id="@+id/action_book_to_detailBottomDialogFragment3"
+            app:destination="@id/detailBottomDialogFragment" />
+        <action
+            android:id="@+id/action_book_to_detailAksaraFragment"
+            app:destination="@id/detailAksaraFragment" />
     </fragment>
     <fragment
         android:id="@+id/draw2"
@@ -43,4 +55,33 @@
         android:name="com.example.lepepak.presentasion.fragment.about.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.lepepak.presentasion.fragment.camera.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailBottomDialogFragment"
+        android:name="com.example.lepepak.presentasion.fragment.detail.DetailBottomDialogFragment"
+        android:label="fragment_bottom_detail_list_dialog"
+        tools:layout="@layout/fragment_bottom_detail_list_dialog" >
+        <argument
+            android:name="nama"
+            app:argType="string" />
+        <argument
+            android:name="desc"
+            app:argType="string" />
+        <argument
+            android:name="link"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailAksaraFragment"
+        android:name="com.example.lepepak.presentasion.fragment.detail.DetailAksaraFragment"
+        android:label="fragment_detail_aksara"
+        tools:layout="@layout/fragment_detail_aksara" />
 </navigation>

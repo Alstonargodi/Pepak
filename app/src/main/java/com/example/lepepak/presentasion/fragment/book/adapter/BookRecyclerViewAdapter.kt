@@ -12,28 +12,26 @@ import com.example.lepepak.model.firebase.JavaneseDBResponse
 import com.example.lepepak.R
 import kotlinx.android.synthetic.main.itemcard_bookhome.view.*
 
-class BookRecyclerViewAdapter: RecyclerView.Adapter<BookRecyclerViewAdapter.viewholder>() {
-    var datalist = emptyList<JavaneseDBResponse>()
+class BookRecyclerViewAdapter: RecyclerView.Adapter<BookRecyclerViewAdapter.ViewHolder>() {
+    private var dataList = emptyList<JavaneseDBResponse>()
+    private lateinit var onItemCLickDetail : OnItemClickDetail
 
-    class viewholder(view: View): RecyclerView.ViewHolder(view) {}
+    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {}
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewholder {
-        return viewholder(LayoutInflater.from(parent.context).inflate(R.layout.itemcard_bookhome,parent,false))
+    fun onItemClickDetail(onItemClickDetail: OnItemClickDetail){
+        this.onItemCLickDetail = onItemClickDetail
     }
 
-    override fun onBindViewHolder(holder: viewholder, position: Int) {
-        val item = datalist[position]
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.itemcard_bookhome,parent,false))
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = dataList[position]
         holder.itemView.tvbook_name.text = item.bentuk
 
-        holder.itemView.setOnClickListener {
-            val dialog = DetailBottomDialogFragment()
-            val supportFragment = (holder.itemView.context as AppCompatActivity).supportFragmentManager
-            val args = Bundle()
-            args.putString("nama",item.bentuk)
-            args.putString("desc",item.desc)
-            args.putString("link",item.link)
-            dialog.setArguments(args)
-            dialog.show(supportFragment,"dialog")
+        holder.itemView.img_book.setOnClickListener {
+            onItemCLickDetail.onItemClickDetail(item)
         }
 
         Glide.with(holder.itemView.context)
@@ -43,11 +41,15 @@ class BookRecyclerViewAdapter: RecyclerView.Adapter<BookRecyclerViewAdapter.view
     }
 
     override fun getItemCount(): Int {
-        return datalist.size
+        return dataList.size
     }
 
-    fun setdata(list : List<JavaneseDBResponse>){
-        datalist = list
+    fun setData(list : List<JavaneseDBResponse>){
+        dataList = list
         notifyDataSetChanged()
+    }
+
+    interface OnItemClickDetail{
+        fun onItemClickDetail(data : JavaneseDBResponse)
     }
 }
